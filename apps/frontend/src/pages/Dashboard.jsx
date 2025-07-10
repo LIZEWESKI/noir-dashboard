@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import React from 'react'
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <>
         <main className='bg-card-foreground'>
