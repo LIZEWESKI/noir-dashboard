@@ -3,7 +3,7 @@ import React from 'react'
 const AppLogo = ({size = 24}) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width={size} height={size} viewBox="0 0 48.000000 48.000000"  style={{placeItems:"center"}}preserveAspectRatio="xMidYMid meet">
-      <g transform="translate(0.000000,44) scale(0.100000,-0.100000)" style={{ color: 'var(--primary)' }} fill="currentColor" stroke="none">
+      <g transform="translate(0.000000,44) scale(0.100000,-0.100000)"  fill="currentColor" stroke="none">
       <path d="M197 319 l-27 -49 27 6 c36 9 35 6 31 52 l-3 41 -28 -50z"/>
       <path d="M250 329 c0 -43 2 -47 28 -52 15 -3 28 -5 28 -4 1 1 -11 25 -27 52 l-29 50 0 -46z"/>
       <path d="M194 255 c-96 -40 -100 -176 -6 -221 18 -9 36 -14 38 -11 3 2 3 59 2 125 l-3 120 -31 -13z"/>
