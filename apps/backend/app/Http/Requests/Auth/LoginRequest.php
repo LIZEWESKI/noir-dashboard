@@ -49,6 +49,14 @@ class LoginRequest extends FormRequest
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
+        }else {
+            $user = Auth::user();
+            if ($user->role !== 'admin') {
+                Auth::logout();
+                throw ValidationException::withMessages([
+                'email' => 'Only admins can log in.',
+                ]);
+            }
         }
 
         RateLimiter::clear($this->throttleKey());

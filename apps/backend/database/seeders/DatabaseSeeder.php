@@ -14,12 +14,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        User::factory()->create([
-            'name' => 'Rick Sanchez',
-            'email' => 'rick@admin.com',
-            "password" => "12345678",
-            "role" => "admin"
-        ]);
+        $fake_users = [
+            [
+                'name' => 'Rick Sanchez',
+                'email' => 'rick@admin.com',
+                "password" => "12345678",
+                "role" => "admin",
+                "profile_picture_path" => "avatars/ava.jpg"
+            ],
+            [
+                'name' => 'Morty Sanchez',
+                'email' => 'morty@admin.com',
+                "password" => "12345678",
+                "role" => "regular",
+            ],
+        ];
+        foreach ($fake_users as $user) {
+            User::factory()->create($user);
+        }
         $this->call(RoomSeeder::class);
         $this->call(FeatureSeeder::class);
         $this->call(FeatureRoomSeeder::class);
