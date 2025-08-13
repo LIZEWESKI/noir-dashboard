@@ -8,7 +8,6 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(null)
   const [loading, setLoading] = useState(true)
-  console.log(user);
   useEffect(() => {
     const savedToken = SecureStorage.getToken()
     if (savedToken) {
@@ -64,7 +63,6 @@ export default function AuthProvider({ children }) {
   const logout = async () => {
     try {
         await api.post("/logout")
-        console.log("logged out")
     } catch (error) {
       console.error("Logout error:", error)
     } finally {

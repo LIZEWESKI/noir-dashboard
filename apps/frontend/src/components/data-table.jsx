@@ -23,6 +23,8 @@ import {
   IconChevronsLeft,
   IconChevronsRight,
   IconCircleCheckFilled,
+  IconCircleDashedX,
+  IconCircleXFilled,
   IconDotsVertical,
   IconGripVertical,
   IconLayoutColumns,
@@ -156,32 +158,32 @@ const columns = [
     accessorKey: "guest",
     header: "Guest Name",
     cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />;
+      // return <TableCellViewer item={row.original} />;
+      return <div className="w-32">
+              <Badge variant="outline" className="text-muted-foreground px-1.5">
+                {row.original.user.name}
+              </Badge>
+          </div>
     },
     enableHiding: false,
   },
   {
-    accessorKey: "room",
+    accessorKey: "room number",
     header: "Room Number",
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.type}
+          {row.original.room.room_number}
         </Badge>
       </div>
     ),
   },
   {
-    accessorKey: "checkin",
+    accessorKey: "check in",
     header: "Check-in Date",
     cell: ({ row }) => (
       <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "Done" ? (
-          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-        ) : (
-          <IconLoader />
-        )}
-        {row.original.status}
+        {row.original.check_in}
       </Badge>
     ),
   },
@@ -190,8 +192,10 @@ const columns = [
     header: "Status",
     cell: ({ row }) => (
       <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "Done" ? (
+        {row.original.status === "active" ? (
           <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+        ) : row.original.status === "cancelled" ?(
+          <IconCircleXFilled className="fill-red-500 dark:fill-red-400"/>
         ) : (
           <IconLoader />
         )}
@@ -204,12 +208,7 @@ const columns = [
     header: "Total Price",
     cell: ({ row }) => (
       <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "Done" ? (
-          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-        ) : (
-          <IconLoader />
-        )}
-        {row.original.status}
+        {row.original.total_price}$
       </Badge>
     ),
   },

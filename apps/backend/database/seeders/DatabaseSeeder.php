@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Payment;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Reservation;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        $reservations = Reservation::factory(60)->create();
+        Payment::factory(30)->hasAttached($reservations)->create();
         $fake_users = [
             [
                 'name' => 'Rick Sanchez',
@@ -35,6 +39,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoomSeeder::class);
         $this->call(FeatureSeeder::class);
         $this->call(FeatureRoomSeeder::class);
-        $this->call(ReservationSeeder::class);
+        // $this->call(ReservationSeeder::class);
     }
 }
