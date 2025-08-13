@@ -1,7 +1,7 @@
 import React from 'react'
 import { RouterProvider,createBrowserRouter,createRoutesFromElements,Route } from 'react-router-dom'
 import Layout from './layouts/Layout'
-import Dashboard from './pages/Dashboard'
+import Dashboard, { loader as dashboardLoader} from './pages/Dashboard'
 import Login from './pages/Login'
 import AuthProvider from './contexts/AuthProvider'
 import { ThemeProvider } from './contexts/ThemeProvider'
@@ -13,13 +13,13 @@ const App = () => {
       <Route path='/' element={<Layout/>}>
         <Route index element={
           <ProtectedRoute>
-            <Dashboard/>
+            <Dashboard />
           </ProtectedRoute>
-      }/>
+      } loader={dashboardLoader}/>
         
         <Route path={LOGIN_ROUTE} element={
           <GuestRoute>
-            <Login/>
+            <Login />
           </GuestRoute>
         }/>
       </Route>

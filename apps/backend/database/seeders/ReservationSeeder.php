@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -27,43 +28,12 @@ class ReservationSeeder extends Seeder
             'total_price' => 245,
             'status' => 'active'
         ])->toArray();
-        // $reservations = [
-        //     [
-        //         'user_id' => '1',
-        //         'room_id' => '1',
-        //         'check_in' => '2025-03-28',
-        //         'check_out' => '2025-03-29',
-        //         'nights' => 3,
-        //         'cleaning_fee' => 25,
-        //         'service_fee' => 15,
-        //         'total_price' => 245,
-        //         'status' => 'active'
-        //     ],
-        //     [
-        //         'user_id' => '1',
-        //         'room_id' => '1',
-        //         'check_in' => '2025-03-24',
-        //         'check_out' => '2025-03-26',
-        //         'nights' => 3,
-        //         'cleaning_fee' => 25,
-        //         'service_fee' => 15,
-        //         'total_price' => 245,
-        //         'status' => 'active'
-        //     ],
-        //     [
-        //         'user_id' => '1',
-        //         'room_id' => '1',
-        //         'check_in' => '2025-03-21',
-        //         'check_out' => '2025-03-22',
-        //         'nights' => 3,
-        //         'cleaning_fee' => 25,
-        //         'service_fee' => 15,
-        //         'total_price' => 245,
-        //         'status' => 'active'
-        //     ],
-        // ];
+        
         foreach ($reservations as $reservation) {
-            Reservation::create($reservation);
+            $plucked_res = Reservation::create($reservation);
+            $payment = Payment::factory()->create();
+            // pluck('id') method lets you attach a collection it accepts id as a param (it'd loop over all the collection and pluck each id)
+            $payment->reservations()->attach($plucked_res->id);
         }
     }
 }

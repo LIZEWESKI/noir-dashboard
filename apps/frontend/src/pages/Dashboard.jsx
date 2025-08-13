@@ -7,9 +7,21 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
+import api from "@/lib/axios"
 import data from "@/lib/data"
-
+import SecureStorage from "@/lib/secure-storage"
+import { redirect, useLoaderData } from "react-router-dom"
+export async function loader() {
+  const userToken = SecureStorage.getToken()
+  if(userToken) {
+    const stats = await api.get("/api/dashboard/stats");
+    return stats.data;
+  }
+  return redirect("/login")
+}
 export default function Dashboard() {
+  const stats = useLoaderData();
+  console.log(stats);
   return (
     <SidebarProvider
       style={
@@ -25,11 +37,11 @@ export default function Dashboard() {
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
+              <SectionCards stats={stats}/>
+              <DataTable data={data} />
               <div className="px-4 lg:px-6">
                 <ChartAreaInteractive />
               </div>
-              <DataTable data={data} />
             </div>
           </div>
         </div>
